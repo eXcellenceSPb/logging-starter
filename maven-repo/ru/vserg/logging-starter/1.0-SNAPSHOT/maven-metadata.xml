@@ -3,26 +3,26 @@
   <groupId>ru.vserg</groupId>
   <artifactId>logging-starter</artifactId>
   <versioning>
-    <lastUpdated>20250804120614</lastUpdated>
+    <lastUpdated>20250805073035</lastUpdated>
     <snapshot>
-      <timestamp>20250804.120614</timestamp>
-      <buildNumber>1</buildNumber>
+      <timestamp>20250805.073035</timestamp>
+      <buildNumber>2</buildNumber>
     </snapshot>
     <snapshotVersions>
       <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0-20250805.073035-2</value>
+        <updated>20250805073035</updated>
+      </snapshotVersion>
+      <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0-20250804.120614-1</value>
-        <updated>20250804120614</updated>
+        <value>1.0-20250805.073035-2</value>
+        <updated>20250805073035</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>module</extension>
-        <value>1.0-20250804.120614-1</value>
-        <updated>20250804120614</updated>
-      </snapshotVersion>
-      <snapshotVersion>
-        <extension>jar</extension>
-        <value>1.0-20250804.120614-1</value>
-        <updated>20250804120614</updated>
+        <value>1.0-20250805.073035-2</value>
+        <updated>20250805073035</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
