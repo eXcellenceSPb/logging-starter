@@ -1,4 +1,4 @@
-package ru.vserg;
+package ru.vserg.logging_starter;
 
 public class LoggingStarterAutoConfiguration {
 
