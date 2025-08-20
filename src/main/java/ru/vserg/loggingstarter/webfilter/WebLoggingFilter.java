@@ -41,9 +41,9 @@ public class WebLoggingFilter extends HttpFilter {
 
             responseWrapper.copyBodyToResponse();
 
-            String responseHeader = getResponseHeaders(responseWrapper);
+            String responseHeaders = headersFromResponseWrapper(responseWrapper);
 
-            log.info("Ответ: {} {} {} {} {}", method, requestURI, response.getStatus(), responseHeader, responseBody);
+            log.info("Ответ: {} {} {} {} {}", method, requestURI, response.getStatus(), responseHeaders, responseBody);
         }
 
     }
@@ -64,7 +64,7 @@ public class WebLoggingFilter extends HttpFilter {
         return addWrappingBracesToHeaders(headers);
     }
 
-    private String getResponseHeaders(ContentCachingResponseWrapper responseWrapper) {
+    private String headersFromResponseWrapper(ContentCachingResponseWrapper responseWrapper) {
         String headers = responseWrapper.getHeaderNames().stream()
                 .map(entry -> {
                     String headerValue = responseWrapper.getHeader(entry);
