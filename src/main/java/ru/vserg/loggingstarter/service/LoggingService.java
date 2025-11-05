@@ -35,14 +35,14 @@ public class LoggingService {
         String method = request.getMethod();
         String requestURI = request.getRequestURI() + formattedQueryString(request);
 
-        logBody(method, requestURI, body);
+        log.info("Тело запроса: {} {} {} body={}", RequestDirection.IN, method, requestURI, body);
     }
 
     public void logResponse(HttpServletRequest request, HttpServletResponse response, String responseBody) {
         String method = request.getMethod();
         String requestURI = request.getRequestURI();
 
-        log.info("Ответ: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, response.getStatus(), responseBody);
+        log.info("Ответ: {} {} {} {} body={}", RequestDirection.IN, method, requestURI, response.getStatus(), responseBody);
     }
 
     public void logFeignRequest(Request request) {
@@ -57,20 +57,18 @@ public class LoggingService {
     public void logFeignBody(RequestTemplate requestTemplate) {
         String method = requestTemplate.method();
         String requestURI = requestTemplate.url();
+        String headers = inlineHeaders(requestTemplate.headers());
 
-        logBody(method, requestURI, requestTemplate.body());
+        log.info("Тело запроса: {} {} {} headers={} body={}", RequestDirection.OUT, method, requestURI, headers, requestTemplate.body());
     }
 
     public void logFeignResponse(Response response, String responseBody) {
         String method = response.request().httpMethod().name();
         String responseURI = response.request().url();
         int status = response.status();
+        String headers = inlineHeaders(response.headers());
 
-        log.info("Ответ: {} {} {} {} body={}", RequestDirection.OUT, method, responseURI, status, responseBody);
-    }
-
-    private void logBody(String method, String requestURI, Object body) {
-        log.info("Тело запроса: {} {} {} {}", RequestDirection.IN, method, requestURI, body);
+        log.info("Ответ: {} {} {} {} headers={} body={}", RequestDirection.OUT, method, responseURI, status, headers, responseBody);
     }
 
     private String inlineHeaders(HttpServletRequest request) {

@@ -45,8 +45,8 @@ public class LoggingStarterAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "logging.web-logging", value = {"enabled", "log-feign-requests-body"}, havingValue = "true")
-    public FeignRequestInterceptor feignRequestBodyAdvice() {
+    @ConditionalOnProperty(prefix = "logging.web-logging", value = {"log-feign-requests-body"}, havingValue = "true")
+    public FeignRequestInterceptor feignRequestInterceptor() {
         return new FeignRequestInterceptor();
     }
 
