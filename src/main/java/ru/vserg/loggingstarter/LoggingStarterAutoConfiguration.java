@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import ru.vserg.loggingstarter.aspect.LogExecutionAspect;
-import ru.vserg.loggingstarter.feign.FeignRequestInterceptor;
 import ru.vserg.loggingstarter.feign.FeignRequestLogger;
 import ru.vserg.loggingstarter.service.LoggingService;
 import ru.vserg.loggingstarter.webfilter.WebLoggingFilter;
@@ -42,12 +41,6 @@ public class LoggingStarterAutoConfiguration {
     @ConditionalOnProperty(prefix = "logging.web-logging", value = {"enabled", "log-feign-requests"}, havingValue = "true")
     public FeignRequestLogger feignRequestLogger() {
         return new FeignRequestLogger();
-    }
-
-    @Bean
-    @ConditionalOnProperty(prefix = "logging.web-logging", value = {"log-feign-requests-body"}, havingValue = "true")
-    public FeignRequestInterceptor feignRequestInterceptor() {
-        return new FeignRequestInterceptor();
     }
 
     @Bean

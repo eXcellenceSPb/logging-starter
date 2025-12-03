@@ -41,8 +41,9 @@ public class LoggingService {
     public void logResponse(HttpServletRequest request, HttpServletResponse response, String responseBody) {
         String method = request.getMethod();
         String requestURI = request.getRequestURI();
+        String headers = inlineHeaders(request);
 
-        log.info("Ответ: {} {} {} {} body={}", RequestDirection.IN, method, requestURI, response.getStatus(), responseBody);
+        log.info("Ответ: {} {} {} {} {} body={}", RequestDirection.IN, method, requestURI, response.getStatus(), headers, responseBody);
     }
 
     public void logFeignRequest(Request request) {
@@ -59,7 +60,7 @@ public class LoggingService {
         String requestURI = requestTemplate.url();
         String headers = inlineHeaders(requestTemplate.headers());
 
-        log.info("Тело запроса: {} {} {} headers={} body={}", RequestDirection.OUT, method, requestURI, headers, requestTemplate.body());
+        log.info("Тело запроса: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, headers, requestTemplate.body());
     }
 
     public void logFeignResponse(Response response, String responseBody) {
@@ -68,7 +69,7 @@ public class LoggingService {
         int status = response.status();
         String headers = inlineHeaders(response.headers());
 
-        log.info("Ответ: {} {} {} {} headers={} body={}", RequestDirection.OUT, method, responseURI, status, headers, responseBody);
+        log.info("Ответ: {} {} {} {} {} body={}", RequestDirection.OUT, method, responseURI, status, headers, responseBody);
     }
 
     private String inlineHeaders(HttpServletRequest request) {
