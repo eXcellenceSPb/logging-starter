@@ -1,7 +1,6 @@
 package ru.vserg.loggingstarter.service;
 
 import feign.Request;
-import feign.RequestTemplate;
 import feign.Response;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -46,21 +45,16 @@ public class LoggingService {
         log.info("Ответ: {} {} {} {} {} body={}", RequestDirection.IN, method, requestURI, response.getStatus(), headers, responseBody);
     }
 
-    public void logFeignRequest(Request request) {
+    public void logFeignRequest(Request request, boolean logBody) {
         String method = request.httpMethod().name();
         String requestURI = request.url();
         String headers = inlineHeaders(request.headers());
-        String body = new String(request.body(), StandardCharsets.UTF_8);
-
-        log.info("Запрос: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, headers, body);
-    }
-
-    public void logFeignBody(RequestTemplate requestTemplate) {
-        String method = requestTemplate.method();
-        String requestURI = requestTemplate.url();
-        String headers = inlineHeaders(requestTemplate.headers());
-
-        log.info("Тело запроса: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, headers, requestTemplate.body());
+        if (logBody) {
+            String body = new String(request.body(), StandardCharsets.UTF_8);
+            log.info("Запрос: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, headers, body);
+        } else {
+            log.info("Запрос: {} {} {} {}", RequestDirection.OUT, method, requestURI, headers);
+        }
     }
 
     public void logFeignResponse(Response response, String responseBody) {
